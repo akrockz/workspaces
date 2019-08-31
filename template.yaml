@@ -1,0 +1,12 @@
+label: deploy-coreservices-workspaces
+type: create_stack
+params:
+  template: workspaces.yaml
+  stack_name: "{{ core.Project }}-{{ core.App }}-resources"
+  parameters:
+    Username: <User>
+  accounts:
+    - "8310551"  # dev1
+  regions:
+    - ap-southeast-1  # Asia Pacific (Singapore)
+
