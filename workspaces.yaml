@@ -1,0 +1,44 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'WorkSpaces creation'
+
+Parameters:
+
+  BundleId:
+    Type: String
+    Description: Select the bundle that should be deployed
+    Default: "wsb-8v4r6"
+  DirectoryId:
+    Type: String
+    Description: Enter the Directory ID for the WorkSpace (Directory Services or AD Connector)
+    Default: "d-96609d5"
+  Username:
+    Type: String
+    Description: Enter the username who will use the WorkSpace
+  EncryptionKey:
+    Type: String
+    Description: Select the KMS encryption key to encrypt WorkSpace volumes
+    Default: "arn:aws:kms:ap-southeast-1:831054051:key/17987eb1-fb74-468c-a679-84cbc418566d"
+  RunningMode:
+    Type: String
+    Description: Running mode for the WorkSpace
+    Default: "AUTO_STOP"
+
+Resources:
+
+  WorkSpace:
+    Type: AWS::WorkSpaces::Workspace
+    Properties:
+      BundleId: !Ref BundleId
+      DirectoryId: !Ref DirectoryId
+      UserName: !Ref Username
+      RootVolumeEncryptionEnabled: true
+      UserVolumeEncryptionEnabled: true
+      VolumeEncryptionKey: !Ref EncryptionKey
+      WorkspaceProperties:
+        RunningMode: !Ref RunningMode
+
+Outputs:
+  WorkSpaceId:
+    Description: ID of the WorkSpaces
+    Value: !Ref WorkSpace
