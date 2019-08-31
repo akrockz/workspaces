@@ -1,0 +1,11 @@
+- label: deploy-coreservices-workspaces
+  params:
+    accounts:
+    - '831054035051'
+    parameters:
+      Username: abcfs
+    regions:
+    - ap-southeast-1
+    stack_name: '{{ core.Project }}-{{ core.App }}-resources-abcfs'
+    template: workspaces.yaml
+  type: create_stack
